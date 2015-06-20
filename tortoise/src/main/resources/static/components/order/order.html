@@ -1,0 +1,64 @@
+<h3>发料单</h3>
+<form ng-submit="order.submit()" name="orderForm" >
+	<div>
+		<label for="name">经办人</label> <input type="text" name="name" id="name"
+			ng-model="order.head.name">
+	</div>
+	<div>
+		<label for="date">时间</label> <input type="date" name="date" id="date"
+			ng-model="order.head.date">
+	</div>
+	<div>
+		<label for="car">车牌号</label> <input type="text" name="car" id="car"
+			ng-model="order.head.car">
+	</div>
+	<div>
+		<label for="start">起始地</label> <input type="text" name="start"
+			id="start" ng-model="order.head.start">
+	</div>
+	<div>
+		<label for="end">目的地</label> <input type="text" name="end" id="end"
+			ng-model="order.head.end">
+	</div>
+	<div ng-repeat="(kind, items) in order.items" ng-if="items.length > 0">
+		<h2>{{kind}}</h2>
+		<div ng-repeat="item in items">
+			<div style="display: inline-block;">
+				<label for="spec">规格</label> <input
+					ng-if="!order.products[kind].useSelect" type="text"
+					name="spec{{$index}}" id="spec" ng-model="item.spec"
+					required="required"> <select
+					ng-if="order.products[kind].useSelect" name="spec{{$index}}"
+					required="required" ng-model="item.spec"
+					ng-init="item.spec = order.products[kind].scope[0]">
+					<option ng-repeat="spec in order.products[kind].scope"
+						value="{{spec}}">{{spec}}</option>
+				</select>
+			</div>
+			<div style="display: inline-block;">
+				<label for="count">数量</label> <input type="text"
+					name="count{{$index}}" id="count" ng-model="item.count"
+					required="required">
+			</div>
+			<div style="display: inline-block;">
+				<button ng-click="order.deleteItem(kind, item)" type="button">删除</button>
+			</div>
+			<div style="display: inline-block;">
+				<button ng-click="order.addItem(kind)" type="button">增加</button>
+			</div>
+		</div>
+		<div>合计: {{order.products[kind].total(items) +
+			order.products[kind].unit}}</div>
+	</div>
+	<div>
+		<select ng-model="currentKind" ng-init="currentKind = order.kinds[0]">
+			<option ng-repeat="kind in order.kinds" value="{{kind}}">{{kind}}</option>
+		</select>
+		<div>
+			<button ng-click="order.addItem(currentKind)" type="button">增加</button>
+		</div>
+	</div>
+	<div>
+		<button type="submit">确认订单</button>
+	</div>
+</form>

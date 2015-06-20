@@ -1,0 +1,29 @@
+<div>
+	<table border="1">
+		<caption>发料单</caption>
+		<tbody>
+			<tr>
+				<td>始发地</td>
+				<td>{{order.head.start}}</td>
+				<td>目的地</td>
+				<td>{{order.head.end}}</td>
+			</tr>
+			<tr>
+				<td>车牌号</td>
+				<td colspan="3">{{order.head.car}}</td>
+			</tr>
+			<tr ng-repeat="(kind, items) in order.items" ng-if="items.length > 0">
+				<td colspan="4">
+					<table border="1" style="width: 100%">
+						<caption>{{kind}}</caption>
+						<tr ng-repeat="item in items">
+							<td>{{item.spec}}</td>
+							<td colspan="3">{{item.count}}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a ui-sref="home">home</a>
+</div>

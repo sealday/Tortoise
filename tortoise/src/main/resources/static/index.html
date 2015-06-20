@@ -4,47 +4,19 @@
 <meta charset="UTF-8">
 <title>代号：乌龟</title>
 </head>
+<body>
+
+	<h2>乌龟</h2>
+
+	<div ui-view></div>
+	
+	<script type="text/javascript"
+		src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript"
+		src="bower_components/angular-messages/angular-messages.js"></script>
+	<script type="text/javascript"
+		src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="components/order/order.js"></script>
 </body>
-
-<h2>代号：乌龟</h2>
-<p>🐢</p>
-
-<input type="text" ng-model="name">
-<p ng-cloak>hello {{name}}</p>
-
-<div ng-controller="OrderController as order">
-	<h3>发料单</h3>
-	<form>
-		<div>
-			<label for="name">经办人</label>
-			<input type="text" name="name" id="name" ng-model="order.name">
-		</div>
-		<div>
-			<label for="date">时间</label>
-			<input type="date" name="date" id="date" ng-model="order.date">
-		</div>
-
-		<div ng-repeat="item in order.items">
-			<div>
-				<label for="kind">种类</label>
-				<select ng-model="item.kind">
-					<option ng-repeat="kind in order.kinds" value="{{kind}}" ng-bind="kind" >
-				</select>
-			</div>
-			<div>
-				<label for="count">数量</label>
-				<input type="text" name="count" id="count" ng-model="item.count">
-			</div>
-		</div>
-		<div>
-			<button ng-click="order.addItem()">增加</button>
-		</div>
-	</form>
-</div>
-
-<script type="text/javascript" src="bower_components/angular/angular.js"></script>
-<script type="text/javascript"
-	src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/order/order.js"></script>
 </html>
